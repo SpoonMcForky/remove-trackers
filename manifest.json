@@ -1,0 +1,7 @@
+{
+  "name": "Remove Trackers",
+  "version": "1.0.0",
+  "description": "Removes tracking from URLs when they're sent.",
+  "author": "SpoonMcForky",
+  "license": "MIT"
+}
