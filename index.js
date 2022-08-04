@@ -17,7 +17,6 @@ module.exports = class RemoveTracking extends Plugin {
         args[1].content = args[1].content.replace(/\?.+/, '');
         args[1].content = `https://tt-embed.com/?q=${ args[1].content}`;
       }
-      console.log(args[1].content);
       return args;
     }, true);
   }
