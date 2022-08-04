@@ -11,7 +11,6 @@ module.exports = class RemoveTracking extends Plugin {
       if (args[1].content.search('https://open.spotify.com/track') !== -1) args[1].content = args[1].content.replace(/\?.{19}/, '');
       else if (args[1].content.search('https://twitter.com') !== -1) {
         args[1].content = args[1].content.replace(/\?.+/, '');
-        //https://www.tiktok.com/@richardsalesofficial/video/7127773315233598725?is_from_webapp=1&sender_device=pc
         args[1].content = args[1].content.replace(/https:\/\/twitter\.com/, 'https://vxtwitter.com');
       } else if (args[1].content.search('https://www.tiktok.com/') !== -1) {
         args[1].content = args[1].content.replace(/\?.+/, '');
