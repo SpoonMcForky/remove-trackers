@@ -8,18 +8,19 @@ module.exports = class RemoveTracking extends Plugin {
   }
   patchMessage() {
     inject('removeTracking', messages, 'sendMessage', args => {
-      if (args[1].content.search('https://open.spotify.com/track') !== -1) args[1].content = args[1].content.replace(/\?.{19}/, '');
-      else if (args[1].content.search('https://twitter.com') !== -1) {
-        args[1].content = args[1].content.replace(/\?.+/, '');
-        args[1].content = args[1].content.replace(/https:\/\/twitter\.com/, 'https://vxtwitter.com');
-      } else if (args[1].content.search('https://www.tiktok.com/') !== -1) {
-        args[1].content = args[1].content.replace(/\?.+/, '');
-        args[1].content = `https://tt-embed.com/?q=${ args[1].content}`;
-      }
+      const x = args;
+      if (x[1].content.search('https://open.spotify.com/track') !== -1) x[1].content = x[1].content.replace(/\?.[^\s]*/g, () => '');
+      else if (x[1].content.search('https://twitter.com') !== -1) {
+        x[1].content = x[1].content.replace(/\?.[^\s]*/g, () => '');
+        x[1].content = x[1].content.replace(/https:\/\/twitter\.com/g, () => 'https://vxtwitter.com');
+      } else if (x[1].content.search('https://www.tiktok.com/') !== -1) {
+        x[1].content = x[1].content.replace(/\?.[^\s]*/g, () => '');
+        x[1].content = x[1].content.replace(/https:\/\/www\.tiktok\.com/g, () => `https://tt-embed.com/?q=${x[1].content}`);
+      } else if (x[1].content.search('https://www.facebook.com/marketplace/item/') !== -1) x[1].content = x[1].content.replace(/(\?ref).[^\s]*/g, () => '');
       return args;
     }, true);
   }
   pluginWillUnload() {
-    uninject('removeTracking'); powercord.api.settings.unregisterSettings(this.entityID);
+    uninject('removeTracking');
   }
 };
