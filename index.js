@@ -26,8 +26,11 @@ module.exports = class RemoveTracking extends Plugin {
         if (this.settings.get('vx')) x[1].content = x[1].content.replace(/https:\/\/twitter\.com/g, () => 'https://vxtwitter.com');
       } else if (x[1].content.search('https://www.tiktok.com/') !== -1) {
         x[1].content = x[1].content.replace(/\?.[^\s]*/g, () => '');
-        x[1].content = x[1].content.replace(/https:\/\/www\.tiktok\.com/g, () => `https://tt-embed.com/?q=${x[1].content}`);
+        x[1].content = x[1].content.replace(/https:\/\/www\.tiktok\.com/g, () => 'https://tt-embed.com/?q=https://www.tiktok.com');
       } else if (x[1].content.search('https://www.facebook.com/marketplace/item/') !== -1) x[1].content = x[1].content.replace(/(\?ref).[^\s]*/g, () => '');
+      else if (x[1].content.search('https://steamcommunity.com/') !== -1) x[1].content = x[1].content.replace(/https:\/\/steamcommunity\.com/, () => 'steam://openurl/https://steamcommunity.com');
+      else if (x[1].content.search('https://store.steampowered.com/') !== -1) x[1].content = x[1].content.replace(/https:\/\/store\.steampowered\.com/g, () => 'steam://openurl/https://store.steampowered.com/');
+      
       return args;
     }, true);
   }
