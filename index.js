@@ -30,6 +30,7 @@ module.exports = class RemoveTracking extends Plugin {
       } else if (x[1].content.search('https://www.facebook.com/marketplace/item/') !== -1) x[1].content = x[1].content.replace(/(\?ref).[^\s]*/g, () => '');
       else if (x[1].content.search('https://steamcommunity.com/') !== -1) x[1].content = x[1].content.replace(/https:\/\/steamcommunity\.com/, () => 'steam://openurl/https://steamcommunity.com');
       else if (x[1].content.search('https://store.steampowered.com/') !== -1) x[1].content = x[1].content.replace(/https:\/\/store\.steampowered\.com/g, () => 'steam://openurl/https://store.steampowered.com/');
+      else if (x[1].content.search('https://www.reddit.com/') !== -1) x[1].content = x[1].content.replace(/\?utm_source.[^\s]*/g, () => '');
       
       return args;
     }, true);
